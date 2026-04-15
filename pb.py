@@ -1,57 +1,62 @@
-import os
+import requests
+import re
+from bs4 import BeautifulSoup
 import time
-from selenium import webdriver
-from selenium.webdriver.chrome.options import Options
-from selenium.webdriver.common.by import By
-from selenium.webdriver.support.ui import WebDriverWait
-from selenium.webdriver.support import expected_conditions as EC
 
-def get_plusbox_channels():
-    # Setup Chrome Options for GitHub Actions
-    chrome_options = Options()
-    chrome_options.add_argument("--headless")
-    chrome_options.add_argument("--no-sandbox")
-    chrome_options.add_argument("--disable-dev-shm-usage")
-    
-    driver = webdriver.Chrome(options=chrome_options)
-    channels = []
+# Configuration
+BASE_URL = "https://plusbox.tv/"
+M3U_FILE = "playlist.m3u"
 
+def get_video_link(channel_url):
+    """Visits the channel page and extracts the raw .m3u8 link."""
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
+        "Referer": BASE_URL
+    }
     try:
-        driver.get("https://plusbox.tv/")
+        response = requests.get(channel_url, headers=headers, timeout=10)
+        # Look for the m3u8 pattern in the HTML (even if inside scripts)
+        m3u8_pattern = re.compile(r'(https?://[^\s"\']+\.m3u8[^\s"\']*)')
+        match = m3u8_pattern.search(response.text)
         
-        # Wait up to 10 seconds for channel elements to appear
-        # Adjust the 'a' or class name if you inspect the site and find a better selector
-        wait = WebDriverWait(driver, 10)
-        wait.until(EC.presence_of_element_located((By.TAG_NAME, "a")))
-        
-        # Give it an extra second for any JS to finish rendering
-        time.sleep(2)
-
-        elements = driver.find_all(By.TAG_NAME, "a")
-        
-        for el in elements:
-            href = el.get_attribute("href")
-            name = el.text.strip()
-            
-            # Filter out external links like Kodevite or Social Media
-            if href and "plusbox.tv" in href and name and "KODEVITE" not in name.upper():
-                channels.append({"name": name, "url": href})
-
+        if match:
+            return match.group(1)
     except Exception as e:
-        print(f"Error: {e}")
-    finally:
-        driver.quit()
-    
-    return channels
+        print(f"Failed to extract video from {channel_url}: {e}")
+    return None
 
-def save_m3u(channels):
-    with open("playlist.m3u", "w", encoding="utf-8") as f:
+def main():
+    headers = {"User-Agent": "Mozilla/5.0"}
+    response = requests.get(BASE_URL, headers=headers)
+    soup = BeautifulSoup(response.text, 'html.parser')
+    
+    channels = []
+    # Adjust 'a' tag logic based on the actual site structure
+    for link in soup.find_all('a', href=True):
+        href = link['href']
+        name = link.get_text(strip=True)
+        
+        # Skip footer/nav links
+        if "play" in href or "channel" in href:
+            full_url = href if href.startswith('http') else BASE_URL + href
+            print(f"Checking channel: {name}...")
+            
+            video_url = get_video_link(full_url)
+            if video_url:
+                channels.append({"name": name, "url": video_url})
+                print(f"Found Video Link: {video_url}")
+            
+            # Avoid getting rate-limited
+            time.sleep(1)
+
+    # Save to M3U
+    with open(M3U_FILE, "w", encoding="utf-8") as f:
         f.write("#EXTM3U\n")
         for ch in channels:
             f.write(f'#EXTINF:-1, {ch["name"]}\n')
+            # You might need to add headers for players like VLC/TiviMate
+            f.write(f'#EXTVLCOPT:http-user-agent={headers["User-Agent"]}\n')
             f.write(f'{ch["url"]}\n')
-    print(f"Generated playlist.m3u with {len(channels)} channels.")
 
 if __name__ == "__main__":
-    ch_list = get_plusbox_channels()
-    save_m3u(ch_list)
+    main()
