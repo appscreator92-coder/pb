@@ -3,7 +3,7 @@ from bs4 import BeautifulSoup
 import os
 
 # Configuration
-URL = "https://plusbox.tv/"
+URL = "https://plusbox.tv/#Star%20Sports%201%20HD"
 FILE_NAME = "playlist.m3u"
 
 def scrape_channels():
