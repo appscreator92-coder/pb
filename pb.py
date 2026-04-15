@@ -1,26 +1,24 @@
-import requests
 import os
 from datetime import datetime, timezone
+from curl_cffi import requests  # Mimics Chrome's TLS fingerprint
 
 # Configuration
-CHANNELS_API = "https://plusbox.tv/channels.php"
-TOKEN_API = "https://plusbox.tv/token.php"
+BASE_URL = "https://plusbox.tv"
+CHANNELS_API = f"{BASE_URL}/channels.php"
+TOKEN_API = f"{BASE_URL}/token.php"
 BACKEND_BASE = "https://backend.plusbox.tv/"
 OUTPUT_FILE = "playlist.m3u"
 
 def get_precise_headers():
     """
-    Returns the exact headers found in the browser's request, 
-    including the specific Sec-CH-UA and Fetch Metadata.
+    Returns the exact headers matching the browser capture provided.
+    Includes the specific Chrome v147 signatures.
     """
     return {
         "authority": "plusbox.tv",
         "accept": "*/*",
-        "accept-encoding": "gzip, deflate, br, zstd",
         "accept-language": "en-US,en;q=0.9",
-        "connection": "keep-alive",
         "content-type": "application/x-www-form-urlencoded; charset=UTF-8",
-        "host": "plusbox.tv",
         "origin": "https://plusbox.tv",
         "referer": "https://plusbox.tv/",
         "sec-ch-ua": '"Google Chrome";v="147", "Not.A/Brand";v="8", "Chromium";v="147"',
@@ -34,23 +32,27 @@ def get_precise_headers():
     }
 
 def main():
-    # Session keeps cookies like PHPSESSID, which is vital for token.php
-    session = requests.Session()
+    # 'impersonate' makes the underlying C library act like a real Chrome browser
+    session = requests.Session(impersonate="chrome110")
     session.headers.update(get_precise_headers())
 
     try:
-        # Step 1: Sync with Server Date
-        print(f"[*] Starting Capture - Local Time: {datetime.now(timezone.utc)} GMT")
+        print(f"[*] Starting Capture at {datetime.now(timezone.utc)} GMT")
         
-        response = session.get(CHANNELS_API, timeout=15)
-        server_date = response.headers.get('Date')
-        print(f"[*] Server Response Date: {server_date}")
+        # 1. Warm up the session by visiting the home page (crucial for cookies/WAF)
+        print("[*] Warming up session...")
+        session.get(BASE_URL, timeout=15)
 
+        # 2. Fetch the channel list
+        print("[*] Fetching channel list...")
+        response = session.get(CHANNELS_API, timeout=15)
+        response.raise_for_status()
+        
         data = response.json()
         channel_list = data.get('channels', [])
         final_channels = []
 
-        # Step 2: Loop and Fetch Tokens
+        # 3. Request tokens for each channel
         for ch in channel_list:
             data_name = ch.get('data_name', '').strip()
             display_name = ch.get('name', data_name)
@@ -59,45 +61,49 @@ def main():
             if not data_name:
                 continue
 
-            # Every POST request to token.php must be treated as a fresh CORS request
+            print(f"  [>] Capturing: {display_name}")
             payload = {'ch_name': data_name}
             
             try:
-                # We use 'data=' for x-www-form-urlencoded content
+                # We use the 'chrome110' impersonation for the POST as well
                 token_resp = session.post(TOKEN_API, data=payload, timeout=10)
                 
-                if token_resp.status_code == 200:
-                    # Strip HTML whitespace from the text/html response
-                    token = token_resp.text.strip()
-                    
-                    if token:
-                        video_url = f"{BACKEND_BASE}{data_name}/tracks-v1/index.fmp4.m3u8?token={token}"
-                        final_channels.append({
-                            "name": display_name, 
-                            "url": video_url,
-                            "logo": logo_url
-                        })
-                        print(f"  [OK] Token captured for {display_name}")
-                else:
-                    print(f"  [FAIL] {display_name} returned status {token_resp.status_code}")
-                    
-            except Exception as e:
-                print(f"  [ERR] Error fetching token for {display_name}: {e}")
+                # Strip potential HTML or whitespace
+                token = token_resp.text.strip()
 
-        # Step 3: Write M3U
+                if "Unauthorized" in token or token_resp.status_code == 403:
+                    print(f"    [!] Error: Streamer protection blocked {display_name}.")
+                    continue
+                
+                if token:
+                    # Construct URL. Note: we add the Referer to the stream URL too.
+                    video_url = f"{BACKEND_BASE}{data_name}/tracks-v1/index.fmp4.m3u8?token={token}"
+                    final_channels.append({
+                        "name": display_name, 
+                        "url": video_url,
+                        "logo": logo_url
+                    })
+            except Exception as e:
+                print(f"    [!] Error for {display_name}: {e}")
+
+        # 4. Generate M3U File
         if final_channels:
             with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
                 f.write("#EXTM3U\n")
                 for ch in final_channels:
+                    # KODI/VLC need the Referer header passed to the stream itself
                     f.write(f'#EXTINF:-1 tvg-logo="{ch["logo"]}", {ch["name"]}\n')
+                    f.write(f'#EXTVLCOPT:http-referrer=https://plusbox.tv/\n')
+                    f.write(f'#EXTVLCOPT:http-user-agent=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/147.0.0.0 Safari/537.36\n')
                     f.write(f'{ch["url"]}\n')
             
-            print(f"\n[SUCCESS] Saved {len(final_channels)} channels to {OUTPUT_FILE}")
+            print(f"\n[SUCCESS] Created {len(final_channels)} channels.")
+            print(f"[NOTE] Playlist saved to {os.path.abspath(OUTPUT_FILE)}")
         else:
-            print("\n[!] No channels were successfully processed.")
+            print("\n[!] Failed to generate any valid streams.")
 
     except Exception as e:
-        print(f"[FATAL] Script error: {e}")
+        print(f"\n[CRITICAL ERROR] {e}")
 
 if __name__ == "__main__":
     main()
