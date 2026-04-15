@@ -1,93 +1,93 @@
 #EXTM3U
-#EXTINF:-1, BTV World
-https://backend.plusbox.tv/BTVWorld/tracks-v1/index.fmp4.m3u8?token=e66df58ad525cb79c49555084a4dfa72fc06c322-c679d8c308f782eb6c8a995fa4a4ecca-1776254696-1776243896
-#EXTINF:-1, ATN Bangla
-https://backend.plusbox.tv/ATNBangla/tracks-v1/index.fmp4.m3u8?token=e37d05716fcba72683a92ed0f4d0d9d5da58c615-c556db66555d2a240e9bd9cef0b73379-1776254697-1776243897
-#EXTINF:-1, ATN News
-https://backend.plusbox.tv/ATNNews/tracks-v1/index.fmp4.m3u8?token=716b8c2d4fcf86dbafedbcc22d929f668d876a0f-e0545e7268bf623796a87df53cbbd88a-1776254698-1776243898
-#EXTINF:-1, Bijoy TV
-https://backend.plusbox.tv/BijoyTV/tracks-v1/index.fmp4.m3u8?token=7ddf2d5c0a71d8c89b09d02689370bfd5fd5a046-9dbfb04b38dedd4c65891a5789ead691-1776254699-1776243899
-#EXTINF:-1, Asian TV
-https://backend.plusbox.tv/AsianTV/tracks-v1/index.fmp4.m3u8?token=ac45aac4e2ef0e2f10e55265ff9505864d656cbe-3857c83e9a975c911bda84a3a24c631d-1776254700-1776243900
-#EXTINF:-1, Bangla Vision
-https://backend.plusbox.tv/BanglaVision/tracks-v1/index.fmp4.m3u8?token=38e513cce07335c7dd3db8deef48a848abcbd620-11b86a5f6ee04f0d27237ac4e32ce2fe-1776254701-1776243901
-#EXTINF:-1, Channel 24
-https://backend.plusbox.tv/Channel24/tracks-v1/index.fmp4.m3u8?token=4a338e72e09920ebd8f48542a36b0c484da66278-dc411181c9fe5097dc24a4b0b8b95a1b-1776254702-1776243902
-#EXTINF:-1, Channel I
-https://backend.plusbox.tv/ChannelI/tracks-v1/index.fmp4.m3u8?token=c896c5dfba40a4db71e2bfc936acccc0fce8ef7f-be787a44f5d3c7b6c081638f6acc854c-1776254703-1776243903
-#EXTINF:-1, DBC News
-https://backend.plusbox.tv/DBCNews/tracks-v1/index.fmp4.m3u8?token=75628f2db84e904d42e4392f01bdc806f1e3f88e-dfbd3a9eefb5bd6462cf8f268e8d1cac-1776254704-1776243904
-#EXTINF:-1, Channel 9
-https://backend.plusbox.tv/Channel9/tracks-v1/index.fmp4.m3u8?token=cb15c5cc0c36cae6b68a629981db1edcd5ad2e7f-91e7153f381e1b199b9ff330af4f79d0-1776254705-1776243905
-#EXTINF:-1, Deepto TV
-https://backend.plusbox.tv/DeeptoTV/tracks-v1/index.fmp4.m3u8?token=158c42ab617a469f6531392d08f03e47be0865a1-f32fe125f874c4deef1ad26f691ddc0e-1776254706-1776243906
-#EXTINF:-1, Desh TV
-https://backend.plusbox.tv/DeshTV/tracks-v1/index.fmp4.m3u8?token=50259ced5abb1f507b6d8dc9f9c17a6eafbfd445-1b4f09ac396806833618cc5d494cf425-1776254707-1776243907
-#EXTINF:-1, Ekushey Tv
-https://backend.plusbox.tv/EkusheyTv/tracks-v1/index.fmp4.m3u8?token=979ea1c4c64c7c9a8f9b20bfc72c67585d98754f-502ecfab7cc49c0427166e85bdc0a7a9-1776254708-1776243908
-#EXTINF:-1, T Sports HD
-https://backend.plusbox.tv/TSportsHD/tracks-v1/index.fmp4.m3u8?token=5045f9575005b0c6d99ab60a5a3043ab066fb8d5-746c95aaed5701d3afd1f040658b1c1c-1776254709-1776243909
-#EXTINF:-1, T Sports
-https://backend.plusbox.tv/TSports/tracks-v1/index.fmp4.m3u8?token=16b6df1f769375f475c2d075deb78602065b6b2d-8561bd44804a64390b7d64f38f3b1694-1776254710-1776243910
-#EXTINF:-1, Independent TV
-https://backend.plusbox.tv/IndependentTV/tracks-v1/index.fmp4.m3u8?token=93f6136379e4323ce167004043a3a870e0bc0616-ce2f225e71c45215088d0e767aa2f093-1776254711-1776243911
-#EXTINF:-1, Gazi TV HD
-https://backend.plusbox.tv/GaziTVHD/tracks-v1/index.fmp4.m3u8?token=4f8bd95342a5c1e8961576075694ad05b03ac89a-8a52ea1bf8ec93351f35260351d152b2-1776254712-1776243912
-#EXTINF:-1, Jamuna TV
-https://backend.plusbox.tv/JamunaTV/tracks-v1/index.fmp4.m3u8?token=6c3f8a93131bbaa147fb0c92b9de72b954b6b8a6-44a6676dfd84b093125d3edc3f368698-1776254713-1776243913
-#EXTINF:-1, Maasranga
-https://backend.plusbox.tv/Maasranga/tracks-v1/index.fmp4.m3u8?token=f453e7b45e6a12e71036f47248242840df0b1987-8558f28b7e8bfb368d6bba050007c563-1776254714-1776243914
-#EXTINF:-1, My TV
-https://backend.plusbox.tv/MyTV/tracks-v1/index.fmp4.m3u8?token=a3da6eb366838e4c082a46a215e9e97dfecb9c7d-f4470b2c3b8db2f9b23c18e05f06d89a-1776254714-1776243914
-#EXTINF:-1, News 24
-https://backend.plusbox.tv/News24/tracks-v1/index.fmp4.m3u8?token=19357ef878ce4d0560d3ec7ba1781484190b098c-6c0e92e133fc730c600a8b0ab615d93b-1776254715-1776243915
-#EXTINF:-1, RTV
-https://backend.plusbox.tv/RTV/tracks-v1/index.fmp4.m3u8?token=7df6b4fea1e57dfb9ca6454b2667c1b37204cf77-594768852cb35160c6e97311118ea4e0-1776254716-1776243916
-#EXTINF:-1, Somoy Tv
-https://backend.plusbox.tv/SomoyTv/tracks-v1/index.fmp4.m3u8?token=7d2a109f9a708eeeb9ae6576cc0b1314ecd70be9-7ea081eaf700c849399f7b67bac08e1b-1776254717-1776243917
-#EXTINF:-1, Colors Bangla
-https://backend.plusbox.tv/ColorsBangla/tracks-v1/index.fmp4.m3u8?token=baf0c448f91cfd0624f9a707270f6bc3da3e5fb8-df947f13999bbd7fd254241f8f52ee56-1776254718-1776243918
-#EXTINF:-1, India Today
-https://backend.plusbox.tv/IndiaToday/tracks-v1/index.fmp4.m3u8?token=e3a49c4ab3c0b103d84a5c781f4c9d378f96638d-3f198a870cf2d16be40f963867bbad1d-1776254719-1776243919
-#EXTINF:-1, RedBull TV
-https://backend.plusbox.tv/RedBullTV/tracks-v1/index.fmp4.m3u8?token=55a15888ff79a38ce53ed031e13baacfe92222d9-c57735c2a4f3f3d642f2db379bb39b3c-1776254720-1776243920
-#EXTINF:-1, Russia Today
-https://backend.plusbox.tv/RussiaToday/tracks-v1/index.fmp4.m3u8?token=a36c5623ba81dd9dcfaa110b30b00392da3f2df5-cdebe469db6a3a338bc9ee0ecf52aee0-1776254721-1776243921
-#EXTINF:-1, Bloomberg TV
-https://backend.plusbox.tv/BloombergTV/tracks-v1/index.fmp4.m3u8?token=763434dff1f6edced82214a011eb11ed2bf0e47d-dd9d8ebb870b5b8959b0a36376224d38-1776254722-1776243922
-#EXTINF:-1, Aljazeera
-https://backend.plusbox.tv/Aljazeera/tracks-v1/index.fmp4.m3u8?token=9ebce4d0fdc303fd451172ff642319d08f730129-59f6661929eb136df8db742491d96a47-1776254723-1776243923
-#EXTINF:-1, Enterr 10
-https://backend.plusbox.tv/Enterr10/tracks-v1/index.fmp4.m3u8?token=686cb1813aad723cba23813f9b89901506d2c837-023cab0692468be2bf6969a515fc1298-1776254724-1776243924
-#EXTINF:-1, Discovery HD
-https://backend.plusbox.tv/DiscoveryHD/tracks-v1/index.fmp4.m3u8?token=cf7c6bce08b6b60de1486258f29baf2fb21d21bd-cccbfb51e62ed3b3c7797f6bb77f3303-1776254725-1776243925
-#EXTINF:-1, Animal Planet
-https://backend.plusbox.tv/AnimalPlanet/tracks-v1/index.fmp4.m3u8?token=722f6aab50e1dcae9f410efec7050af1405b18d8-1e670c5cd4148ee3ce2cc1428c7c8110-1776254726-1776243926
-#EXTINF:-1, Sony TV HD
-https://backend.plusbox.tv/SonyTVHD/tracks-v1/index.fmp4.m3u8?token=3315fbd93a5687d0f499fc8910e9ee12b5765e57-a96c4d6c0c44a46cbf7d3a4cefaa142d-1776254727-1776243927
-#EXTINF:-1, Sony Aath
-https://backend.plusbox.tv/SonyAath/tracks-v1/index.fmp4.m3u8?token=de5314a19e9e25db7dc2651186ca2a6d61c7096b-f43945f0edff6f2d38a32d9668e97aca-1776254728-1776243928
-#EXTINF:-1, Sony Max HD
-https://backend.plusbox.tv/SonyMaxHD/tracks-v1/index.fmp4.m3u8?token=719a09b0323a6f005f91d5a844d9df1ccb8a2e9f-61e9a60efe25f7f6794b007469c2b52e-1776254729-1776243929
-#EXTINF:-1, Sony Ten 1 HD
-https://backend.plusbox.tv/SonyTen1HD/tracks-v1/index.fmp4.m3u8?token=078fe7f9e0b5852b9a56a12d12b4838c36139372-6f89cebb5ae038c2c23ac417abffd609-1776254730-1776243930
-#EXTINF:-1, Sony Ten 2 HD
-https://backend.plusbox.tv/SonyTen2HD/tracks-v1/index.fmp4.m3u8?token=74036ff0613e1da438f06ece6a3264269077564d-3c6b84f4da8c16d607992f217bee37fa-1776254731-1776243931
-#EXTINF:-1, Sony Ten 3 HD
-https://backend.plusbox.tv/SonyTen3HD/tracks-v1/index.fmp4.m3u8?token=b707bc254583c5747899d4485a0456f841db0785-d65ae2e37b243fa6fd88814372811bd9-1776254731-1776243931
-#EXTINF:-1, Star Sports 1 HD
-https://backend.plusbox.tv/StarSports1HD/tracks-v1/index.fmp4.m3u8?token=f6821449a3011257a3bf038400629539bfff303f-177b132a245b89f21f8036af610590e5-1776254732-1776243932
-#EXTINF:-1, Star Sports 2 HD
-https://backend.plusbox.tv/StarSports2HD/tracks-v1/index.fmp4.m3u8?token=c966aeb26eb40f9ee1a392ad6b0a892d5ca4c435-1911518261d388dc276e786b05b4dae2-1776254733-1776243933
-#EXTINF:-1, Star Sports Select 1
-https://backend.plusbox.tv/StarSportsSelect1/tracks-v1/index.fmp4.m3u8?token=3750cb49c5612d9e17dcaed2df58ca14dc3daa2b-95772dcb1ccd5d253461dd25359cf831-1776254734-1776243934
-#EXTINF:-1, Star Sports Select 2
-https://backend.plusbox.tv/StarSportsSelect2/tracks-v1/index.fmp4.m3u8?token=2d5322bc77d83b472b6be7fa9ccf5735462c5cfc-3c4075841de526b212e4e0aa828e8cfb-1776254735-1776243935
-#EXTINF:-1, Star Jalsha HD
-https://backend.plusbox.tv/StarJalshaHD/tracks-v1/index.fmp4.m3u8?token=bbe18e0bef63843093e94d653a2d33f70a319847-9a33f5abc92fdc739427a506232bb732-1776254736-1776243936
-#EXTINF:-1, Star Gold HD
-https://backend.plusbox.tv/StarGoldHD/tracks-v1/index.fmp4.m3u8?token=c58c9adf36a4fc8ee2e41d4883c8984475890b02-0dda5251a769972fbd9e74a9d8a7c6f4-1776254737-1776243937
-#EXTINF:-1, Zee Bangla HD
-https://backend.plusbox.tv/ZeeBanglaHD/tracks-v1/index.fmp4.m3u8?token=0ccf41eb76ace69884658ac634f5d52897e0407e-8a6fce3d5e693b1758ed650ccf7f75c1-1776254738-1776243938
-#EXTINF:-1, Zee Cinema HD
-https://backend.plusbox.tv/ZeeCinemaHD/tracks-v1/index.fmp4.m3u8?token=28da585de5bfecdc641e9f408cb63802b664dee6-2ac9c5d262c8b0daa513b30277534230-1776254739-1776243939
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/btvworld.png", BTV World
+https://backend.plusbox.tv/BTVWorld/tracks-v1/index.fmp4.m3u8?token=374cff0e119fc9dfaa4959af2d8c46f93451684a-1c11c411175628e7400f15712c94778d-1776254912-1776244112
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/atnbangla.png", ATN Bangla
+https://backend.plusbox.tv/ATNBangla/tracks-v1/index.fmp4.m3u8?token=790b05505113df5dd3eafd8ddc7c33f3400604af-61599ef17396027e1a4a6109d29b38c4-1776254914-1776244114
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/atnnews.png", ATN News
+https://backend.plusbox.tv/ATNNews/tracks-v1/index.fmp4.m3u8?token=abf6ab99bbeb3878d57b2906cd8118e841c0df22-f92f6956b53ea12b8c1db6c0d9d3ea5f-1776254915-1776244115
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/bijoytv.png", Bijoy TV
+https://backend.plusbox.tv/BijoyTV/tracks-v1/index.fmp4.m3u8?token=423cdb495f66056e5d9bccab90b1fd87cd71b525-9a7964b714ceeebf33e82fc4624f565a-1776254916-1776244116
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/asiantv.png", Asian TV
+https://backend.plusbox.tv/AsianTV/tracks-v1/index.fmp4.m3u8?token=c9f759a83f71bc7899244d37eda022da7344f556-9b97b22fa237dcaddab467dee35d2e6e-1776254917-1776244117
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/banglavision.png", Bangla Vision
+https://backend.plusbox.tv/BanglaVision/tracks-v1/index.fmp4.m3u8?token=84376211f52ceab89f0b550b87412aa39fdccbb4-02d4c04c1fea4f1cb2e798c903066da0-1776254918-1776244118
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/channel24.png", Channel 24
+https://backend.plusbox.tv/Channel24/tracks-v1/index.fmp4.m3u8?token=3d56d8eb0ac08583e4a33c1f1fc27279c449d502-fce2f2dcd90ad6ee23c7bbb74be10e31-1776254919-1776244119
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/channeli.png", Channel I
+https://backend.plusbox.tv/ChannelI/tracks-v1/index.fmp4.m3u8?token=f9cdd0bb1ec5f5d2e2d01d36a480a14b66ea7024-74863e718fd22039baae480cbf6e4243-1776254920-1776244120
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/dbcnews.png", DBC News
+https://backend.plusbox.tv/DBCNews/tracks-v1/index.fmp4.m3u8?token=c3308add1f44b7a9d1d7460f5f2313936979e90e-68c6110021e8a3413b8cf091549218a8-1776254921-1776244121
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/channel9.png", Channel 9
+https://backend.plusbox.tv/Channel9/tracks-v1/index.fmp4.m3u8?token=0a23cad66d5a59ed43aad6347292dd1850cd5e15-2161f498b9f803c1de597096942a818e-1776254922-1776244122
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/deeptotv.png", Deepto TV
+https://backend.plusbox.tv/DeeptoTV/tracks-v1/index.fmp4.m3u8?token=2428120a2080636071c3d0943c7384b08e47fd1f-f8dcf16f1317013282dcf03f87874273-1776254923-1776244123
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/deshtv.png", Desh TV
+https://backend.plusbox.tv/DeshTV/tracks-v1/index.fmp4.m3u8?token=22ebc20a0246872d91a75e5d7b9d846e5a2129be-731132dcc4fa69ee754742f92ab3632c-1776254925-1776244125
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/ekusheytv.png", Ekushey Tv
+https://backend.plusbox.tv/EkusheyTv/tracks-v1/index.fmp4.m3u8?token=903aa82e38cf16d188b70f38d9800d3d9ba7997a-ac7402b19254df3f8e67a7af41e3302f-1776254926-1776244126
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/tsports.png", T Sports HD
+https://backend.plusbox.tv/TSportsHD/tracks-v1/index.fmp4.m3u8?token=721b11463e947ca19e44c15bf07fc867ece09a60-5bdca71c2cce876193b665068690b9a6-1776254927-1776244127
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/tsports.png", T Sports
+https://backend.plusbox.tv/TSports/tracks-v1/index.fmp4.m3u8?token=751824af97ccdb6e9911ff77180ef0bb011a29b1-68f3672d1fd67dfc2178da59b0fd7399-1776254928-1776244128
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/independent.png", Independent TV
+https://backend.plusbox.tv/IndependentTV/tracks-v1/index.fmp4.m3u8?token=1151ec91630d98ffa49581d7a235743a6d8dbd2f-855662dcf180fab9b7c4fa5d5f0e873f-1776254929-1776244129
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/gtv.png", Gazi TV HD
+https://backend.plusbox.tv/GaziTVHD/tracks-v1/index.fmp4.m3u8?token=d77a1bb30698a2601ee073c65c7684315583f952-86cc3705fcf12d823850b511a35d10ea-1776254930-1776244130
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/jamunatv.png", Jamuna TV
+https://backend.plusbox.tv/JamunaTV/tracks-v1/index.fmp4.m3u8?token=44cee7ad823ca633e1834a1f833eae166a866a0a-50db1644b3c78cd0e8afb272d34ba84d-1776254931-1776244131
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/maasranga.png", Maasranga
+https://backend.plusbox.tv/Maasranga/tracks-v1/index.fmp4.m3u8?token=d9740d6eed56db4d4e793a745fcb4815312e5f38-5648f2fa59293bae0793491d63a736c4-1776254932-1776244132
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/mytv.png", My TV
+https://backend.plusbox.tv/MyTV/tracks-v1/index.fmp4.m3u8?token=ed97eaaf56fbd5d45bed0047a6d983b95df45503-965dfa9f088ed2d510d99055c7bc1b8b-1776254933-1776244133
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/news24.png", News 24
+https://backend.plusbox.tv/News24/tracks-v1/index.fmp4.m3u8?token=a0a6079c46c408d41516cca90ca66ad1b2a46c43-b6e2e9b85239a44377a50c78d35dd3a6-1776254934-1776244134
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/rtv.png", RTV
+https://backend.plusbox.tv/RTV/tracks-v1/index.fmp4.m3u8?token=5ad10ec21071d9f302eca220e3872e038280f76e-0b62163749921fd68a2cc39ec5e0e950-1776254935-1776244135
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/somoytv.png", Somoy Tv
+https://backend.plusbox.tv/SomoyTv/tracks-v1/index.fmp4.m3u8?token=042bd4bf960637607235f9fd826756532b300f20-140026ba77e336c93de4139d8fa86058-1776254937-1776244137
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/colorsbangla.png", Colors Bangla
+https://backend.plusbox.tv/ColorsBangla/tracks-v1/index.fmp4.m3u8?token=017198b98ce1c33d84a91b6930bea8c256ccbb35-89fcca20f7c53fbd373e11f87e86f3d2-1776254938-1776244138
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/indiatoday.png", India Today
+https://backend.plusbox.tv/IndiaToday/tracks-v1/index.fmp4.m3u8?token=b4c9b9f4d47bb3a8511ee51f4e925840a0c0115b-a3078b5ddb0d802b00284726ba09306a-1776254939-1776244139
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/redbulltv.png", RedBull TV
+https://backend.plusbox.tv/RedBullTV/tracks-v1/index.fmp4.m3u8?token=71da10b27273c6223889e3d267f6b193f59eb454-5b49136712d8d44fc6f9059f7ad92768-1776254940-1776244140
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/russiatoday.png", Russia Today
+https://backend.plusbox.tv/RussiaToday/tracks-v1/index.fmp4.m3u8?token=e1507d979bffd14ed0e0a0a7360f62e2b880dd92-d8f9a509c0a46bb6d7f790fb8832dded-1776254941-1776244141
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/bloomberg.png", Bloomberg TV
+https://backend.plusbox.tv/BloombergTV/tracks-v1/index.fmp4.m3u8?token=781a8fca29d4103b5266cbe88c72c006ba577ec7-6e03e95b71f49a0dc13d07cd0e84cbb1-1776254942-1776244142
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/aljazeera.png", Aljazeera
+https://backend.plusbox.tv/Aljazeera/tracks-v1/index.fmp4.m3u8?token=33091340e8dc38e84eb2efffdf347a8f6e8ad38a-6a0194199da519d4536189619249b380-1776254943-1776244143
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/enterr10.png", Enterr 10
+https://backend.plusbox.tv/Enterr10/tracks-v1/index.fmp4.m3u8?token=8bc65c0529c250a6ba5007bdceb9f2d07ccf41d7-24e13cb3b15e69822729d05b61ec6ac7-1776254944-1776244144
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/discoveryhdworld.png", Discovery HD
+https://backend.plusbox.tv/DiscoveryHD/tracks-v1/index.fmp4.m3u8?token=c7732b3886c576f7dea906845cc5fa63259fbe99-e9761ca0f0c1e61e5ea95a4332a60200-1776254945-1776244145
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/animalplanet.png", Animal Planet
+https://backend.plusbox.tv/AnimalPlanet/tracks-v1/index.fmp4.m3u8?token=8f21151f40c64fcc09b56d905955ea6c2e1726ed-b325aabd48707dfd1360bd17c86209fa-1776254946-1776244146
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/sonytv.png", Sony TV HD
+https://backend.plusbox.tv/SonyTVHD/tracks-v1/index.fmp4.m3u8?token=5956867a88bf81f315ba902710956c53bb947688-e6c456cd4e91aa10b347cf71cddcae4a-1776254947-1776244147
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/sonyaath.png", Sony Aath
+https://backend.plusbox.tv/SonyAath/tracks-v1/index.fmp4.m3u8?token=6da3e1d04a73fc36c476baafdaf7f4f347c02e9d-daced68b278c11ba7bee400dd9c12f36-1776254948-1776244148
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/sonymaxhd.png", Sony Max HD
+https://backend.plusbox.tv/SonyMaxHD/tracks-v1/index.fmp4.m3u8?token=5252ab09a21fc0def2213e1fbabb767963e2e97c-8c70b4fdf0cb8ab3d6fc8249cdf6ee6a-1776254949-1776244149
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/ten1.png", Sony Ten 1 HD
+https://backend.plusbox.tv/SonyTen1HD/tracks-v1/index.fmp4.m3u8?token=ab7b7732ab014b787a2ca5316317a5c8e5024ce6-eac500834ed32283bab7e7460bb25d48-1776254951-1776244151
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/ten2.png", Sony Ten 2 HD
+https://backend.plusbox.tv/SonyTen2HD/tracks-v1/index.fmp4.m3u8?token=ceb0af5ac37f7f3db58cca0dbd64f69a1ca1f4b9-6e12ef15b8b14e8cf7faa64351b19113-1776254951-1776244151
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/ten3.png", Sony Ten 3 HD
+https://backend.plusbox.tv/SonyTen3HD/tracks-v1/index.fmp4.m3u8?token=c190c8d07bcaabc5d92588ef801afa6c0421901c-7672d19c2477b362730d3121aa5dfe89-1776254952-1776244152
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/starsports1hd.png", Star Sports 1 HD
+https://backend.plusbox.tv/StarSports1HD/tracks-v1/index.fmp4.m3u8?token=c8d8a458282359b321a275ba4c4f10963826aab8-051ae7cdb9ae74c399601e128ff22e73-1776254953-1776244153
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/starsports2hd.png", Star Sports 2 HD
+https://backend.plusbox.tv/StarSports2HD/tracks-v1/index.fmp4.m3u8?token=f0ed02b1b4a5f2609b45efcea66abd47b68e7202-319f5c17053c0f1d86acdfee0e826ee5-1776254955-1776244155
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/starsportsselect1.png", Star Sports Select 1
+https://backend.plusbox.tv/StarSportsSelect1/tracks-v1/index.fmp4.m3u8?token=f1d591629450c81b65ddc4d40965fb73b2f2816a-1c3744205005e610e3b150b3312bb560-1776254956-1776244156
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/starsportsselect2.png", Star Sports Select 2
+https://backend.plusbox.tv/StarSportsSelect2/tracks-v1/index.fmp4.m3u8?token=cdeca5378453eba4b27530b40a0bff0528f1da13-29ac0730c9ff190a0a5e95946495b1cf-1776254957-1776244157
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/starjalshahd.png", Star Jalsha HD
+https://backend.plusbox.tv/StarJalshaHD/tracks-v1/index.fmp4.m3u8?token=ba2a5043eb180ffafc322dea4e0560715cce247c-7578040d21c5d526377650ce830102fb-1776254958-1776244158
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/stargoldhd.png", Star Gold HD
+https://backend.plusbox.tv/StarGoldHD/tracks-v1/index.fmp4.m3u8?token=60728b7759c1a7f60c00fce3592ee3b2189ebb58-5f316b39e39bb5d4717e9e5190cfc70f-1776254959-1776244159
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/zeebanglahd.png", Zee Bangla HD
+https://backend.plusbox.tv/ZeeBanglaHD/tracks-v1/index.fmp4.m3u8?token=784b141391f6b2d7c9c801de61eed78544fecaba-04bb9b04f0e236e1debd04a994f4100a-1776254960-1776244160
+#EXTINF:-1 icon="https://plusbox.tv/img/channels/zeecinemahd.png", Zee Cinema HD
+https://backend.plusbox.tv/ZeeCinemaHD/tracks-v1/index.fmp4.m3u8?token=b23b0ef94f6c9a1772e76aabd49162a26183e28e-79ab08c8d96e9e6b4d5e6c0121a59ee4-1776254961-1776244161
