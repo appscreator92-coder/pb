@@ -2,61 +2,59 @@ import requests
 import re
 import os
 
-# Configuration
+# The main site and the observed backend
 BASE_URL = "https://plusbox.tv/"
 OUTPUT_FILE = "playlist.m3u"
 
 def main():
-    print("Fetching Plusbox main page...")
+    print("Scraping Plusbox for tokenized streams...")
     headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-        "Referer": "https://google.com"
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Referer": BASE_URL
     }
     
     try:
+        # Step 1: Fetch the main page content
         response = requests.get(BASE_URL, headers=headers, timeout=15)
         response.raise_for_status()
-        html_content = response.text
+        html = response.text
 
-        # 1. Look for M3U8 links directly in the page source (often in scripts)
-        # Regex to find links ending in .m3u8, capturing the URL
-        streams = re.findall(r'(https?://[^\s"\']+\.m3u8[^\s"\']*)', html_content)
+        # Step 2: Extract tokenized backend links using Regex
+        # Matches the pattern: https://backend.plusbox.tv/...index.m3u8?token=...
+        pattern = r'(https://backend\.plusbox\.tv/[^\s"\']+\.m3u8\?token=[^\s"\']+)'
+        found_links = re.findall(pattern, html)
         
-        # 2. Look for common JSON patterns like { "title": "...", "file": "..." }
-        # This is common in web players
-        json_streams = re.findall(r'["\']title["\']\s*:\s*["\']([^"\']+)["\'].*?["\']file["\']\s*:\s*["\']([^"\']+\.m3u8[^"\']*)["\']', html_content)
-
+        # Deduplicate links
+        unique_links = list(set(found_links))
+        
         channels = []
-        
-        # Process direct M3U8 finds
-        for i, url in enumerate(set(streams)):
-            clean_url = url.replace('\\', '')
-            channels.append({"name": f"Channel {i+1}", "url": clean_url})
+        for link in unique_links:
+            # Clean up escaped slashes if any
+            clean_link = link.replace('\\', '')
+            
+            # Extract a name from the URL path (e.g., StarSports1HD)
+            name_match = re.search(r'backend\.plusbox\.tv/([^/]+)/', clean_link)
+            name = name_match.group(1) if name_match else "Live Channel"
+            
+            channels.append({"name": name, "url": clean_link})
 
-        # Process JSON finds (better names)
-        for name, url in json_streams:
-            clean_url = url.replace('\\', '')
-            channels.append({"name": name, "url": clean_url})
-
-        # Deduplicate and save
-        unique_channels = {ch['url']: ch['name'] for ch in channels}
-        
+        # Step 3: Generate the M3U file
         with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
             f.write("#EXTM3U\n")
-            if not unique_channels:
-                print("Warning: No streams found. The site may be using an iframe protector.")
+            if not channels:
+                print("No active tokenized links found in the source.")
             else:
-                for url, name in unique_channels.items():
-                    f.write(f'#EXTINF:-1, {name}\n')
-                    f.write(f'{url}\n')
+                for ch in channels:
+                    f.write(f'#EXTINF:-1, {ch["name"]}\n')
+                    f.write(f'{ch["url"]}\n')
         
-        print(f"Success! Found {len(unique_channels)} video streams.")
+        print(f"Success! {len(channels)} channels added to {OUTPUT_FILE}.")
 
     except Exception as e:
-        print(f"Scraper Error: {e}")
-        # Create empty file to keep Git happy
-        with open(OUTPUT_FILE, "w") as f:
-            f.write("#EXTM3U\n")
+        print(f"Error: {e}")
+        # Ensure file exists to prevent GitHub Action errors
+        if not os.path.exists(OUTPUT_FILE):
+            with open(OUTPUT_FILE, "w") as f: f.write("#EXTM3U\n")
 
 if __name__ == "__main__":
     main()
