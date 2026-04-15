@@ -1,60 +1,66 @@
 import requests
-import re
+import json
 import os
 
-# Configuration
-BASE_URL = "https://plusbox.tv"
-# This is the most likely endpoint for KODEVITE-built players
-DATA_URL = "https://plusbox.tv/config/channels.json" 
+# The exact endpoints found in your JavaScript
+CHANNELS_API = "https://plusbox.tv/channels.php"
+TOKEN_API = "https://plusbox.tv/token.php"
+BACKEND_BASE = "https://backend.plusbox.tv/"
 OUTPUT_FILE = "playlist.m3u"
 
 def main():
-    print("Connecting to Plusbox API...")
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
-        "Referer": BASE_URL,
-        "Accept": "application/json"
+        "Referer": "https://plusbox.tv/",
+        "X-Requested-With": "XMLHttpRequest"
     }
 
     try:
-        # Step 1: Try to fetch the channel list directly
-        response = requests.get(DATA_URL, headers=headers, timeout=15)
+        print("Fetching channel list...")
+        response = requests.get(CHANNELS_API, headers=headers)
+        data = response.json()
         
-        # If the JSON file isn't at /config/, we scan the main page for the list
-        if response.status_code != 200:
-            print("Direct JSON not found. Scanning main page scripts...")
-            response = requests.get(BASE_URL, headers=headers)
-            content = response.text
-        else:
-            content = response.text
-
-        # Step 2: Use Regex to find any backend links with tokens
-        # This matches the pattern you provided earlier
-        links = re.findall(r'(https://backend\.plusbox\.tv/[^\s"\']+\.m3u8\?token=[^\s"\']+)', content)
+        # Access the 'channels' array from the JSON response
+        channel_list = data.get('channels', [])
         
-        # Step 3: Extract names and build the list
-        channels = []
-        for link in set(links):
-            clean_link = link.replace('\\', '')
-            # Extract name from URL (e.g., StarSports1HD)
-            name_match = re.search(r'plusbox\.tv/([^/]+)/', clean_link)
-            name = name_match.group(1) if name_match else "Live Channel"
-            channels.append({"name": name, "url": clean_link})
+        final_channels = []
 
-        # Step 4: Finalize the M3U
+        for ch in channel_list:
+            data_name = ch.get('data_name', '').strip()
+            display_name = ch.get('name', data_name)
+            
+            if not data_name:
+                continue
+
+            print(f"Requesting token for: {display_name}")
+            
+            # Step 2: POST to token.php to get the unique token
+            # This matches: data: {ch_name: player.data("name")}
+            payload = {'ch_name': data_name}
+            token_response = requests.post(TOKEN_API, data=payload, headers=headers)
+            
+            if token_response.status_code == 200:
+                token = token_response.text.strip()
+                
+                # Construct the final M3U8 URL
+                # Based on: player.data("source") + data
+                # where source is https://backend.plusbox.tv/data_name/embed.html?token=
+                # Note: For M3U8, we replace embed.html with the index file
+                video_url = f"{BACKEND_BASE}{data_name}/tracks-v1/index.fmp4.m3u8?token={token}"
+                
+                final_channels.append({"name": display_name, "url": video_url})
+            
+        # Step 3: Write to M3U
         with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
             f.write("#EXTM3U\n")
-            if not channels:
-                print("FAILURE: No links detected. The site is likely using a POST request for tokens.")
-            else:
-                for ch in channels:
-                    f.write(f'#EXTINF:-1, {ch["name"]}\n')
-                    f.write(f'{ch["url"]}\n')
-                print(f"SUCCESS: {len(channels)} channels added to {OUTPUT_FILE}")
+            for ch in final_channels:
+                f.write(f'#EXTINF:-1, {ch["name"]}\n')
+                f.write(f'{ch["url"]}\n')
+        
+        print(f"Done! Generated {len(final_channels)} channels.")
 
     except Exception as e:
         print(f"Error: {e}")
-        # Make sure file exists for GitHub Actions
         if not os.path.exists(OUTPUT_FILE):
             with open(OUTPUT_FILE, "w") as f: f.write("#EXTM3U\n")
 
