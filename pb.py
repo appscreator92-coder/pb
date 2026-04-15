@@ -1,55 +1,57 @@
-import requests
-from bs4 import BeautifulSoup
 import os
+import time
+from selenium import webdriver
+from selenium.webdriver.chrome.options import Options
+from selenium.webdriver.common.by import By
+from selenium.webdriver.support.ui import WebDriverWait
+from selenium.webdriver.support import expected_conditions as EC
 
-# Configuration
-URL = "https://plusbox.tv/#Star%20Sports%201%20HD"
-FILE_NAME = "playlist.m3u"
-
-def scrape_channels():
+def get_plusbox_channels():
+    # Setup Chrome Options for GitHub Actions
+    chrome_options = Options()
+    chrome_options.add_argument("--headless")
+    chrome_options.add_argument("--no-sandbox")
+    chrome_options.add_argument("--disable-dev-shm-usage")
+    
+    driver = webdriver.Chrome(options=chrome_options)
     channels = []
-    headers = {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/119.0.0.0 Safari/537.36",
-        "Referer": "https://plusbox.tv/"
-    }
 
     try:
-        response = requests.get(URL, headers=headers, timeout=15)
-        response.raise_for_status()
-        soup = BeautifulSoup(response.text, 'html.parser')
+        driver.get("https://plusbox.tv/")
+        
+        # Wait up to 10 seconds for channel elements to appear
+        # Adjust the 'a' or class name if you inspect the site and find a better selector
+        wait = WebDriverWait(driver, 10)
+        wait.until(EC.presence_of_element_located((By.TAG_NAME, "a")))
+        
+        # Give it an extra second for any JS to finish rendering
+        time.sleep(2)
 
-        # Look for links that likely point to channel players
-        # Adjust the selector if you see specific classes like 'channel-card'
-        for link in soup.find_all('a', href=True):
-            href = link['href']
-            name = link.get_text(strip=True) or "Unknown Channel"
+        elements = driver.find_all(By.TAG_NAME, "a")
+        
+        for el in elements:
+            href = el.get_attribute("href")
+            name = el.text.strip()
             
-            # Filter for links that aren't external social media or nav links
-            if href.startswith('http') or href.endswith('.php') or 'play' in href:
-                # Ensure the URL is absolute
-                full_url = href if href.startswith('http') else f"https://plusbox.tv/{href.lstrip('/')}"
-                channels.append({"name": name, "url": full_url})
+            # Filter out external links like Kodevite or Social Media
+            if href and "plusbox.tv" in href and name and "KODEVITE" not in name.upper():
+                channels.append({"name": name, "url": href})
 
     except Exception as e:
-        print(f"Error during scraping: {e}")
-
+        print(f"Error: {e}")
+    finally:
+        driver.quit()
+    
     return channels
 
-def save_to_m3u(channels):
-    # Always create/overwrite the file to prevent Git pathspec errors
-    with open(FILE_NAME, "w", encoding="utf-8") as f:
+def save_m3u(channels):
+    with open("playlist.m3u", "w", encoding="utf-8") as f:
         f.write("#EXTM3U\n")
-        if not channels:
-            print("No channels found, creating empty M3U.")
-            return
-            
         for ch in channels:
-            # We add a User-Agent and Referer to the M3U link for better compatibility
             f.write(f'#EXTINF:-1, {ch["name"]}\n')
             f.write(f'{ch["url"]}\n')
-            
-    print(f"Successfully saved {len(channels)} channels to {FILE_NAME}")
+    print(f"Generated playlist.m3u with {len(channels)} channels.")
 
 if __name__ == "__main__":
-    found_channels = scrape_channels()
-    save_to_m3u(found_channels)
+    ch_list = get_plusbox_channels()
+    save_m3u(ch_list)
