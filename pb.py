@@ -1,70 +1,62 @@
 import requests
 import re
-from bs4 import BeautifulSoup
 import os
 
 # Configuration
 BASE_URL = "https://plusbox.tv/"
 OUTPUT_FILE = "playlist.m3u"
 
-def get_video_source(page_url):
-    """Scrapes a single channel page for the .m3u8 link."""
+def main():
+    print("Fetching Plusbox main page...")
     headers = {
         "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/123.0.0.0 Safari/537.36",
-        "Referer": BASE_URL
+        "Referer": "https://google.com"
     }
-    try:
-        response = requests.get(page_url, headers=headers, timeout=10)
-        # Search for m3u8 patterns in scripts or source
-        m3u8_pattern = re.compile(r'(https?://[^\s"\']+\.m3u8[^\s"\']*)')
-        match = m3u8_pattern.search(response.text)
-        if match:
-            return match.group(1).replace('\\', '') # Clean any escaped slashes
-    except Exception as e:
-        print(f"Error checking {page_url}: {e}")
-    return None
-
-def main():
-    print("Starting scraper...")
-    headers = {"User-Agent": "Mozilla/5.0"}
     
     try:
-        response = requests.get(BASE_URL, headers=headers)
+        response = requests.get(BASE_URL, headers=headers, timeout=15)
         response.raise_for_status()
-        soup = BeautifulSoup(response.text, 'html.parser')
-        
-        channels = []
-        # Find all channel links (usually <a> tags with 'play' or specific IDs)
-        for link in soup.find_all('a', href=True):
-            href = link['href']
-            name = link.get_text(strip=True)
-            
-            # Filter for video/play links and ignore generic dev links
-            if "play" in href or "channel" in href:
-                full_url = href if href.startswith('http') else BASE_URL + href.lstrip('/')
-                
-                print(f"Extracting video for: {name}")
-                video_url = get_video_source(full_url)
-                
-                if video_url:
-                    channels.append({"name": name, "url": video_url})
+        html_content = response.text
 
-        # Write the M3U file
+        # 1. Look for M3U8 links directly in the page source (often in scripts)
+        # Regex to find links ending in .m3u8, capturing the URL
+        streams = re.findall(r'(https?://[^\s"\']+\.m3u8[^\s"\']*)', html_content)
+        
+        # 2. Look for common JSON patterns like { "title": "...", "file": "..." }
+        # This is common in web players
+        json_streams = re.findall(r'["\']title["\']\s*:\s*["\']([^"\']+)["\'].*?["\']file["\']\s*:\s*["\']([^"\']+\.m3u8[^"\']*)["\']', html_content)
+
+        channels = []
+        
+        # Process direct M3U8 finds
+        for i, url in enumerate(set(streams)):
+            clean_url = url.replace('\\', '')
+            channels.append({"name": f"Channel {i+1}", "url": clean_url})
+
+        # Process JSON finds (better names)
+        for name, url in json_streams:
+            clean_url = url.replace('\\', '')
+            channels.append({"name": name, "url": clean_url})
+
+        # Deduplicate and save
+        unique_channels = {ch['url']: ch['name'] for ch in channels}
+        
         with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
             f.write("#EXTM3U\n")
-            if not channels:
-                print("No video links found.")
-            for ch in channels:
-                f.write(f'#EXTINF:-1, {ch["name"]}\n')
-                f.write(f'{ch["url"]}\n')
+            if not unique_channels:
+                print("Warning: No streams found. The site may be using an iframe protector.")
+            else:
+                for url, name in unique_channels.items():
+                    f.write(f'#EXTINF:-1, {name}\n')
+                    f.write(f'{url}\n')
         
-        print(f"Successfully saved {len(channels)} channels to {OUTPUT_FILE}")
+        print(f"Success! Found {len(unique_channels)} video streams.")
 
     except Exception as e:
-        print(f"Main scraper error: {e}")
-        # Ensure file exists even on failure to prevent Git errors
-        if not os.path.exists(OUTPUT_FILE):
-            open(OUTPUT_FILE, 'w').close()
+        print(f"Scraper Error: {e}")
+        # Create empty file to keep Git happy
+        with open(OUTPUT_FILE, "w") as f:
+            f.write("#EXTM3U\n")
 
 if __name__ == "__main__":
     main()
