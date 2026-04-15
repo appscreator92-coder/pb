@@ -1,31 +1,51 @@
 import requests
+import re
 import os
 
-CHANNELS_API = "https://plusbox.tv/channels.php"
-PROXY_URL = "https://hdlive1.unaux.com/livetv/hotstar/proxy.php?id=" # Change this to your URL
-OUTPUT_FILE = "playlist.m3u"
-
 def main():
-    headers = {"User-Agent": "Mozilla/5.0", "Referer": "https://plusbox.tv/"}
-    try:
-        response = requests.get(CHANNELS_API, headers=headers)
-        data = response.json()
-        channels = data.get('channels', [])
-
-        with open(OUTPUT_FILE, "w", encoding="utf-8") as f:
-            f.write("#EXTM3U\n")
-            for ch in channels:
-                name = ch.get('name')
-                data_name = ch.get('data_name')
-                logo = ch.get('icon')
-                
-                # Point to your PHP Proxy instead of the direct backend
-                f.write(f'#EXTINF:-1 tvg-logo="{logo}", {name}\n')
-                f.write(f'{PROXY_URL}{data_name}\n')
+    # Use a Session to keep cookies alive
+    session = requests.Session()
+    
+    headers = {
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36",
+        "Referer": "https://plusbox.tv/",
+        "Origin": "https://plusbox.tv",
+        "X-Requested-With": "XMLHttpRequest"
+    }
+    
+    # 1. First, visit the homepage to get initial cookies
+    session.get("https://plusbox.tv/", headers=headers)
+    
+    # 2. Get the channel list
+    ch_response = session.get("https://plusbox.tv/channels.php", headers=headers)
+    channels = ch_response.json().get('channels', [])
+    
+    playlist_content = "#EXTM3U\n"
+    
+    for ch in channels:
+        data_name = ch['data_name'].strip()
+        print(f"Processing: {data_name}")
         
-        print("Playlist created pointing to PHP Proxy.")
-    except Exception as e:
-        print(f"Error: {e}")
+        # 3. Get the token (Session will automatically send cookies back)
+        token_payload = {'ch_name': data_name}
+        token_res = session.post("https://plusbox.tv/token.php", data=token_payload, headers=headers)
+        token = token_res.text.strip()
+        
+        if token:
+            # Construct link
+            url = f"https://backend.plusbox.tv/{data_name}/tracks-v1/index.fmp4.m3u8?token={token}"
+            
+            # 4. TEST the link immediately within the same session
+            # This 'activates' the token for this session/IP
+            test_res = session.head(url, headers=headers)
+            
+            if test_res.status_code == 200:
+                playlist_content += f'#EXTINF:-1 tvg-logo="{ch["icon"]}", {ch["name"]}\n{url}\n'
+            else:
+                print(f"--- Failed to validate {data_name} (Status: {test_res.status_code})")
+
+    with open("playlist.m3u", "w") as f:
+        f.write(playlist_content)
 
 if __name__ == "__main__":
     main()
